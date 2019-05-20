@@ -162,9 +162,9 @@ module Web3
     end
 
     def get_logs(from_block : (BigInt | String)? = nil, to_block : (BigInt | String)? = nil,
-        address : (String | Array(String) | Nil) = nil, topics : (Array(String | Array(String) | Nil)) = nil) : Array(FilterChanges | String)
+        address : (String | Array(String) | Nil) = nil, topics : (Array(String | Array(String) | Nil)) = nil) : Array(Log)
       filter = FilterObject.new(from_block, to_block, address, topics)
-      @rpc.request ParamsRequest(FilterObject).new("eth_newFilter", [filter]), ResultResponse(Array(FilterChanges | String))
+      @rpc.request ParamsRequest(FilterObject).new("eth_getLogs", [filter]), ResultResponse(Array(Log))
     end
 
     def get_work : Array(String)
